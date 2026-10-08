@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mahir Elite2 | Creative Portfolio</title>
+<meta name="description" content="Mahir Elite2 — Professional Graphic Designer and Digital Creative.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Playfair+Display:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#e99a12;
+  --gold2:#b9780b;
+  --cream:#f7f1e7;
+  --white:#fff;
+  --navy:#14233f;
+  --ink:#252526;
+  --muted:#d8d3ca;
+  --panel:#202126;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Cormorant Garamond",serif;
+  color:var(--white);
+  background:
+    radial-gradient(circle at 10% 30%,rgba(233,154,18,.35),transparent 27%),
+    linear-gradient(105deg,#8d6728 0%,#34323a 35%,#14233f 100%);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+body:before{
+  content:"";position:fixed;inset:0;pointer-events:none;opacity:.10;
+  background-image:radial-gradient(#fff 0.6px,transparent .6px);
+  background-size:5px 5px;z-index:-1;
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:12px 5vw;
+  background:linear-gradient(to bottom,rgba(20,24,35,.88),transparent);
+}
+.nav-inner{
+  max-width:1200px;margin:auto;display:flex;align-items:center;justify-content:center;
+}
+.nav-links{display:flex;gap:clamp(25px,5vw,72px);align-items:center}
+.nav-links a{
+  font-size:clamp(20px,2.5vw,33px);font-style:italic;
+  color:#f7f3ec;transition:.3s;position:relative;white-space:nowrap;
+}
+.nav-links a:hover,.nav-links a.active{color:var(--gold)}
+.nav-links a:after{
+  content:"";position:absolute;left:50%;bottom:-7px;width:0;height:2px;
+  background:var(--gold);transition:.3s;transform:translateX(-50%);
+}
+.nav-links a:hover:after,.nav-links a.active:after{width:70%}
+.menu{display:none;background:none;border:0;color:white;font-size:25px}
+section{min-height:100vh;position:relative;padding:105px 6vw 60px}
+.hero{display:flex;align-items:center;justify-content:center;text-align:center;padding-top:115px}
+.hero-inner{width:min(1050px,100%);margin:auto}
+.eyebrow{font-size:clamp(34px,5vw,64px);line-height:.9;font-weight:500}
+.hero h1{
+  font-family:"Playfair Display",serif;font-size:clamp(75px,12vw,150px);
+  line-height:.83;color:var(--gold);font-weight:700;margin:15px 0 35px;
+  text-shadow:0 7px 30px rgba(0,0,0,.18);
+}
+.profile-frame{
+  width:min(360px,72vw);aspect-ratio:1/1.12;margin:0 auto 28px;
+  position:relative;border:2px solid white;border-radius:34px 100px 34px 34px;
+  padding:12px;transform:rotate(-1deg);
+}
+.profile-frame:before{
+  content:"";position:absolute;inset:0;background:#ff9418;border-radius:28px 90px 28px 28px;
+  z-index:-1;transform:translate(12px,12px);
+}
+.profile-frame img{
+  width:100%;height:100%;object-fit:cover;object-position:center top;
+  border-radius:22px 78px 22px 22px;
+}
+.hero-name{font-size:clamp(58px,8vw,92px);line-height:.75;color:var(--gold);font-style:italic}
+.hero-role{font-size:clamp(31px,4vw,55px);margin-top:18px}
+.hero-role b{display:block;color:var(--gold);font-style:italic;font-size:.65em;margin-top:4px}
+.swipe{position:absolute;right:6vw;bottom:55px;font-size:25px;font-style:italic}
+.swipe span{display:block;font-size:55px;transform:rotate(18deg)}
+.section-title{
+  text-align:center;font-family:"Playfair Display",serif;
+  font-size:clamp(54px,8vw,105px);line-height:.9;margin-bottom:35px
+}
+.section-title .gold{color:var(--gold)}
+.text-page{max-width:1050px;margin:auto;text-align:center}
+.lead{font-size:clamp(24px,3vw,39px);line-height:1.25;font-weight:600}
+.about-copy{font-size:clamp(25px,3vw,40px);line-height:1.15;margin:25px auto 30px;max-width:1050px}
+.sub-title{
+  font-family:"Playfair Display",serif;color:var(--gold);
+  font-size:clamp(43px,5vw,65px);margin:15px 0;
+}
+.skills-list{
+  max-width:1000px;margin:auto;text-align:left;font-size:clamp(21px,2.2vw,31px);
+  line-height:1.18
+}
+.skills-list p{margin:12px 0}.arrow{color:var(--gold);font-weight:bold;margin-right:7px}
+.exp-layout{max-width:1100px;margin:auto}
+.exp-image{width:min(780px,100%);margin:20px auto 35px;border-radius:22px;overflow:hidden;box-shadow:0 20px 60px #0004}
+.exp-image img{width:100%}
+.projects-title{margin-bottom:45px}
+.project-showcase{
+  width:min(980px,100%);margin:auto;border:5px dashed #fff;border-radius:10px;
+  padding:18px;background:rgba(0,0,0,.10);box-shadow:0 20px 60px #0003
+}
+.project-showcase img{width:100%;border-radius:5px}
+.project-caption{text-align:center;font-size:clamp(30px,4vw,52px);color:var(--gold);margin-top:25px;font-style:italic}
+.reference-grid{
+  max-width:1100px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:28px
+}
+.ref-card{background:rgba(255,255,255,.08);border:1px solid #ffffff35;border-radius:25px;padding:18px;backdrop-filter:blur(8px)}
+.ref-card img{width:100%;border-radius:16px}
+.ref-card h3{font-size:34px;color:var(--gold);margin:12px 5px 0}
+.contact{text-align:center}
+.contact-box{max-width:850px;margin:auto}
+.contact p{font-size:clamp(25px,3vw,38px);margin:20px 0}
+.contact-btn{
+  display:inline-block;margin-top:15px;background:var(--gold);color:#151515;
+  padding:14px 28px;border-radius:40px;font-family:Inter,sans-serif;font-weight:700
+}
+.socials{display:flex;justify-content:center;gap:15px;margin-top:30px}
+.socials a{width:45px;height:45px;border:1px solid #fff6;border-radius:50%;display:grid;place-items:center;font-family:Inter,sans-serif}
+footer{text-align:center;padding:30px;border-top:1px solid #fff2;color:#d8d3ca;font-size:17px}
+.reveal{opacity:0;transform:translateY(35px);transition:1s ease}
+.reveal.show{opacity:1;transform:none}
+@media(max-width:700px){
+  .nav{padding:12px 18px}.nav-inner{justify-content:flex-end}
+  .menu{display:block}.nav-links{
+    display:none;position:absolute;top:62px;right:18px;left:18px;
+    background:#1d2028ee;border:1px solid #fff2;border-radius:18px;
+    padding:15px;flex-direction:column;gap:12px
+  }
+  .nav-links.open{display:flex}.nav-links a{font-size:27px}
+  section{padding:90px 20px 45px}.hero{padding-top:100px}
+  .reference-grid{grid-template-columns:1fr}
+  .swipe{display:none}
+  .skills-list{text-align:left}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <button class="menu" id="menu" aria-label="Open menu">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="#home" class="active">Home</a>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#reference">Reference</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero" id="home">
+  <div class="hero-inner reveal">
+    <div class="eyebrow">explore my creative</div>
+    <h1>portfolio</h1>
+    <div class="profile-frame">
+      <img src="images/profile.png" alt="Mahir Elite2">
+    </div>
+    <div class="hero-name">I,M</div>
+    <div class="hero-role">a professional <b>graphic designer</b></div>
+  </div>
+  <div class="swipe">swipe<span>↗</span></div>
+</section>
+
+<section id="about">
+  <div class="text-page reveal">
+    <h2 class="section-title"><span class="gold">About Me</span></h2>
+    <p class="about-copy">
+      My Name is Mahir elite2. I am a passionate graphic designer and digital creative
+      dedicated to turning bold ideas into compelling visual stories. With a strong eye
+      for detail and a deep appreciation for clean aesthetics, I specialize in bringing
+      brands and concepts to life across both digital and print mediums.
+    </p>
+    <h3 class="sub-title">What I Do</h3>
+    <div class="skills-list">
+      <p><span class="arrow">➜</span><b>Brand Identity & Logo Design:</b> Building cohesive, memorable visual foundations—from custom logos and typography to complete brand guidelines and official stationery.</p>
+      <p><span class="arrow">➜</span><b>Marketing & Promotional Materials:</b> Designing high-impact visual assets, including social media content, promotional banners, trifold brochures, and advertising campaigns.</p>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="reveal">
+    <h2 class="section-title projects-title">Board <span class="gold">Designs</span></h2>
+    <div class="project-showcase">
+      <img src="images/projects.png" alt="Mahir Elite2 board designs">
+    </div>
+    <div class="project-caption">Selected Creative Work</div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="exp-layout reveal">
+    <h2 class="section-title">Experience</h2>
+    <p class="lead">
+      Creative Graphic Designer with <u>4 years</u> of hands-on experience
+      conceptualizing and executing compelling visual solutions across digital and print media.
+      Adept at translating brand requirements into engaging designs that elevate user
+      experience, strengthen brand identity, and drive strategic communication goals.
+    </p>
+    <h3 class="sub-title" style="text-align:center">Core Competencies & Skills</h3>
+    <div class="skills-list">
+      <p><span class="arrow">➜</span><b>Design Discipline:</b> Brand Identity & Guideline, Typography, Layout & Composition, UI/UX Design, Social Media Creatives, Packaging, and Print Production.</p>
+      <p><span class="arrow">➜</span><b>Software & Tools:</b> Adobe Creative Cloud (Photoshop, Illustrator), CapCut, PixelLab, Figma, Canva, Procreate.</p>
+      <p><span class="arrow">➜</span><b>Workflow:</b> Wireframing, Concept Development, Collaborative Teamwork, Client Management, and Agile Project Delivery.</p>
+    </div>
+  </div>
+</section>
+
+<section id="reference">
+  <div class="reveal">
+    <h2 class="section-title"><span class="gold">Reference</span></h2>
+    <div class="reference-grid">
+      <div class="ref-card">
+        <img src="images/designer.png" alt="Graphic designer profile">
+        <h3>Graphic Design</h3>
+      </div>
+      <div class="ref-card">
+        <img src="images/about.png" alt="About profile design">
+        <h3>Creative Identity</h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="reveal">
+    <h2 class="section-title">Professional <span class="gold">Journey</span></h2>
+    <div class="exp-image"><img src="images/experience.png" alt="Experience profile"></div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="contact-box reveal">
+    <h2 class="section-title">Let's <span class="gold">Create</span></h2>
+    <p>Have a design project, brand idea, poster, website, or creative concept?</p>
+    <a class="contact-btn" href="mailto:mahir@example.com">Contact Me ↗</a>
+    <div class="socials">
+      <a href="#" aria-label="Instagram">IG</a>
+      <a href="#" aria-label="TikTok">TK</a>
+      <a href="#" aria-label="Facebook">FB</a>
+      <a href="#" aria-label="LinkedIn">IN</a>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 Mahir Elite2 — Creative Graphic Designer</footer>
+
+<script>
+const menu=document.getElementById("menu");
+const links=document.getElementById("navLinks");
+menu.addEventListener("click",()=>links.classList.toggle("open"));
+document.querySelectorAll(".nav-links a").forEach(a=>{
+  a.addEventListener("click",()=>links.classList.remove("open"));
+});
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add("show")})
+},{threshold:.12});
+document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+
+const sections=[...document.querySelectorAll("section[id]")];
+const navA=[...document.querySelectorAll(".nav-links a")];
+window.addEventListener("scroll",()=>{
+  let current="";
+  sections.forEach(s=>{
+    if(window.scrollY >= s.offsetTop-180) current=s.id;
+  });
+  navA.forEach(a=>{
+    a.classList.toggle("active",a.getAttribute("href")==="#"+current);
+  });
+});
+</script>
+</body> <script>
+function loadProjects() {
+
+    const projects =
+        JSON.parse(localStorage.getItem("portfolioProjects")) || [];
+
+    const container = document.getElementById("projectsGrid");
+
+    if (!container) return;
+
+    if (projects.length === 0) {
+        container.innerHTML = `
+            <p>No Projects Yet</p>
+        `;
+        return;
+    }
+
+    container.innerHTML = projects.map(project => {
+
+        return `
+            <article class="project-card">
+
+                <div class="project-image">
+                    <img
+                        src="${project.image || ''}"
+                        alt="${project.name || 'Project'}"
+                    >
+                </div>
+
+                <div class="project-content">
+
+                    ${
+                        project.featured
+                        ? `<span class="featured-badge">FEATURED</span>`
+                        : ""
+                    }
+
+                    <span class="project-category">
+                        ${project.category || "Project"}
+                    </span>
+
+                    <h3>${project.name || ""}</h3>
+
+                    <p>${project.description || ""}</p>
+
+                    ${
+                        project.link
+                        ? `
+                        <a href="${project.link}"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            View Project →
+                        </a>
+                        `
+                        : ""
+                    }
+
+                </div>
+
+            </article>
+        `;
+
+    }).join("");
+}
+
+document.addEventListener("DOMContentLoaded", loadProjects);
+</script>
+</html>
