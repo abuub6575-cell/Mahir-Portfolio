@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Portfolio Manager — Mahir Elite2</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#080808;
+    color:#fff;
+    min-height:100vh;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    width:250px;
+    height:100vh;
+    background:#111;
+    border-right:1px solid #262626;
+    padding:25px 15px;
+    z-index:1000;
+}
+
+.logo{
+    text-align:center;
+    margin-bottom:35px;
+}
+
+.logo h2{
+    font-size:23px;
+    color:#ff3030;
+}
+
+.logo span{
+    color:#fff;
+}
+
+.logo p{
+    color:#777;
+    font-size:11px;
+    margin-top:5px;
+}
+
+.menu-title{
+    color:#666;
+    font-size:11px;
+    margin:20px 10px 10px;
+    text-transform:uppercase;
+}
+
+.menu a{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    color:#aaa;
+    text-decoration:none;
+    padding:13px 14px;
+    border-radius:10px;
+    margin-bottom:6px;
+    transition:.3s;
+}
+
+.menu a:hover,
+.menu a.active{
+    background:#1d1d1d;
+    color:#fff;
+}
+
+.menu a.active{
+    border-left:3px solid #ff3030;
+}
+
+.logout{
+    position:absolute;
+    bottom:25px;
+    left:15px;
+    right:15px;
+}
+
+.logout button{
+    width:100%;
+    padding:13px;
+    border:1px solid #333;
+    background:#171717;
+    color:#aaa;
+    border-radius:10px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.logout button:hover{
+    background:#ff3030;
+    color:#fff;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.main{
+    margin-left:250px;
+    padding:30px;
+}
+
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+}
+
+.topbar h1{
+    font-size:28px;
+}
+
+.topbar p{
+    color:#777;
+    margin-top:5px;
+}
+
+.back-btn{
+    text-decoration:none;
+    color:#ccc;
+    border:1px solid #333;
+    padding:10px 16px;
+    border-radius:9px;
+    transition:.3s;
+}
+
+.back-btn:hover{
+    background:#1d1d1d;
+}
+
+/* =========================
+   STATS
+========================= */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+    margin-bottom:25px;
+}
+
+.stat{
+    background:#111;
+    border:1px solid #242424;
+    padding:22px;
+    border-radius:15px;
+}
+
+.stat small{
+    color:#777;
+}
+
+.stat h2{
+    margin-top:8px;
+    color:#ff3030;
+    font-size:30px;
+}
+
+/* =========================
+   ADD PROJECT
+========================= */
+
+.panel{
+    background:#111;
+    border:1px solid #252525;
+    border-radius:16px;
+    padding:25px;
+    margin-bottom:25px;
+}
+
+.panel-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:22px;
+}
+
+.panel-header h2{
+    font-size:20px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.form-group.full{
+    grid-column:1 / -1;
+}
+
+label{
+    color:#bbb;
+    font-size:13px;
+}
+
+input,
+textarea{
+    width:100%;
+    background:#090909;
+    border:1px solid #303030;
+    color:#fff;
+    padding:13px;
+    border-radius:9px;
+    outline:none;
+    transition:.3s;
+}
+
+input:focus,
+textarea:focus{
+    border-color:#ff3030;
+}
+
+textarea{
+    min-height:120px;
+    resize:vertical;
+}
+
+input[type="file"]{
+    cursor:pointer;
+}
+
+.image-preview{
+    margin-top:10px;
+    width:180px;
+    height:110px;
+    border-radius:10px;
+    overflow:hidden;
+    border:1px solid #333;
+    display:none;
+}
+
+.image-preview img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.buttons{
+    display:flex;
+    gap:10px;
+    margin-top:20px;
+}
+
+.btn{
+    border:none;
+    padding:12px 20px;
+    border-radius:9px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.btn-primary{
+    background:#ff3030;
+    color:#fff;
+}
+
+.btn-primary:hover{
+    background:#e02020;
+}
+
+.btn-secondary{
+    background:#222;
+    color:#aaa;
+}
+
+.btn-secondary:hover{
+    background:#333;
+    color:#fff;
+}
+
+/* =========================
+   SEARCH
+========================= */
+
+.search-box{
+    margin-bottom:20px;
+}
+
+.search-box input{
+    max-width:400px;
+}
+
+/* =========================
+   PROJECTS
+========================= */
+
+.projects{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.project-card{
+    background:#111;
+    border:1px solid #272727;
+    border-radius:15px;
+    overflow:hidden;
+    transition:.3s;
+}
+
+.project-card:hover{
+    transform:translateY(-4px);
+    border-color:#444;
+}
+
+.project-image{
+    width:100%;
+    height:190px;
+    background:#191919;
+    overflow:hidden;
+}
+
+.project-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.project-content{
+    padding:18px;
+}
+
+.project-content h3{
+    margin-bottom:8px;
+}
+
+.project-content p{
+    color:#888;
+    font-size:13px;
+    line-height:1.6;
+    min-height:62px;
+}
+
+.project-actions{
+    display:flex;
+    gap:8px;
+    margin-top:15px;
+}
+
+.action-btn{
+    flex:1;
+    padding:9px;
+    border-radius:8px;
+    border:1px solid #333;
+    background:#191919;
+    color:#aaa;
+    cursor:pointer;
+}
+
+.action-btn:hover{
+    color:#fff;
+    background:#242424;
+}
+
+.delete:hover{
+    background:#ff3030;
+    border-color:#ff3030;
+}
+
+/* =========================
+   EMPTY
+========================= */
+
+.empty{
+    text-align:center;
+    padding:60px 20px;
+    color:#666;
+    border:1px dashed #333;
+    border-radius:15px;
+}
+
+.empty h3{
+    color:#aaa;
+    margin-bottom:8px;
+}
+
+/* =========================
+   TOAST
+========================= */
+
+.toast{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    background:#171717;
+    border:1px solid #333;
+    padding:15px 20px;
+    border-radius:10px;
+    opacity:0;
+    transform:translateY(20px);
+    pointer-events:none;
+    transition:.3s;
+    z-index:9999;
+}
+
+.toast.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:1000px){
+
+    .projects{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:750px){
+
+    .sidebar{
+        width:70px;
+        padding:20px 8px;
+    }
+
+    .logo h2{
+        font-size:15px;
+    }
+
+    .logo p,
+    .menu-title,
+    .menu a span,
+    .logout button span{
+        display:none;
+    }
+
+    .menu a{
+        justify-content:center;
+        font-size:18px;
+    }
+
+    .logout{
+        left:8px;
+        right:8px;
+    }
+
+    .main{
+        margin-left:70px;
+        padding:20px;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-group.full{
+        grid-column:auto;
+    }
+
+    .projects{
+        grid-template-columns:1fr;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .topbar{
+        align-items:flex-start;
+        gap:15px;
+        flex-direction:column;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     SIDEBAR
+========================= -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+        <h2>Mahir <span>Elite2</span></h2>
+        <p>PORTFOLIO MANAGER</p>
+    </div>
+
+    <div class="menu-title">Management</div>
+
+    <div class="menu">
+
+        <a href="admin-dashboard.html">
+            📊 <span>Dashboard</span>
+        </a>
+
+        <a href="portfolio-manager.html" class="active">
+            🚀 <span>Projects</span>
+        </a>
+
+        <a href="index.html" target="_blank">
+            🌐 <span>Website</span>
+        </a>
+
+    </div>
+
+    <div class="menu-title">Account</div>
+
+    <div class="menu">
+
+        <a href="admin.html">
+            🔐 <span>Admin Login</span>
+        </a>
+
+    </div>
+
+    <div class="logout">
+
+        <button onclick="logout()">
+            🚪 <span>Logout</span>
+        </button>
+
+    </div>
+
+</aside>
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main class="main">
+
+    <div class="topbar">
+
+        <div>
+            <h1>Portfolio Manager</h1>
+            <p>Manage your portfolio projects</p>
+        </div>
+
+        <a href="index.html" target="_blank" class="back-btn">
+            🌐 View Portfolio
+        </a>
+
+    </div>
+
+
+    <!-- =========================
+         STATS
+    ========================= -->
+
+    <section class="stats">
+
+        <div class="stat">
+            <small>Total Projects</small>
+            <h2 id="projectCount">0</h2>
+        </div>
+
+        <div class="stat">
+            <small>Published Projects</small>
+            <h2 id="publishedCount">0</h2>
+        </div>
+
+        <div class="stat">
+            <small>Manager Status</small>
+            <h2 style="font-size:20px;">ONLINE</h2>
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         ADD PROJECT
+    ========================= -->
+
+    <section class="panel">
+
+        <div class="panel-header">
+
+            <h2 id="formTitle">➕ Add New Project</h2>
+
+        </div>
+
+        <form id="projectForm">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>Project Name</label>
+
+                    <input
+                        type="text"
+                        id="projectName"
+                        placeholder="Example: Smart Trading Bot"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Project Link</label>
+
+                    <input
+                        type="url"
+                        id="projectLink"
+                        placeholder="https://example.com"
+                    >
+
+                </div>
+
+
+                <div class="form-group full">
+
+                    <label>Description</label>
+
+                    <textarea
+                        id="projectDescription"
+                        placeholder="Write a short description about your project..."
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <div class="form-group full">
+
+                    <label>Project Image</label>
+
+                    <input
+                        type="file"
+                        id="projectImage"
+                        accept="image/*"
+                    >
+
+                    <div class="image-preview" id="imagePreview">
+
+                        <img id="previewImg" src="" alt="Preview">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="buttons">
+
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                    id="saveButton"
+                >
+                    💾 Save Project
+                </button>
+
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    onclick="resetForm()"
+                >
+                    Clear
+                </button>
+
+            </div>
+
+        </form>
+
+    </section>
+
+
+    <!-- =========================
+         PROJECT LIST
+    ========================= -->
+
+    <section class="panel">
+
+        <div class="panel-header">
+
+            <h2>🚀 My Projects</h2>
+
+        </div>
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="🔍 Search projects..."
+                oninput="displayProjects()"
+            >
+
+        </div>
+
+        <div id="projectsContainer" class="projects"></div>
+
+    </section>
+
+</main>
+
+
+<!-- =========================
+     TOAST
+========================= -->
+
+<div class="toast" id="toast"></div>
+
+
+<script>
+
+/* =====================================
+   ADMIN SECURITY
+===================================== */
+
+const loggedIn = sessionStorage.getItem("adminLoggedIn");
+
+if(loggedIn !== "true"){
+
+    window.location.href = "admin.html";
+
+}
+
+
+/* =====================================
+   PROJECT STORAGE
+===================================== */
+
+let projects = JSON.parse(
+    localStorage.getItem("portfolioProjects")
+) || [];
+
+
+let editingId = null;
+
+let currentImage = "";
+
+
+/* =====================================
+   ELEMENTS
+===================================== */
+
+const form = document.getElementById("projectForm");
+
+const nameInput =
+    document.getElementById("projectName");
+
+const descriptionInput =
+    document.getElementById("projectDescription");
+
+const linkInput =
+    document.getElementById("projectLink");
+
+const imageInput =
+    document.getElementById("projectImage");
+
+const imagePreview =
+    document.getElementById("imagePreview");
+
+const previewImg =
+    document.getElementById("previewImg");
+
+const projectsContainer =
+    document.getElementById("projectsContainer");
+
+const projectCount =
+    document.getElementById("projectCount");
+
+const publishedCount =
+    document.getElementById("publishedCount");
+
+const searchInput =
+    document.getElementById("searchInput");
+
+const formTitle =
+    document.getElementById("formTitle");
+
+const saveButton =
+    document.getElementById("saveButton");
+
+
+/* =====================================
+   IMAGE PREVIEW
+===================================== */
+
+imageInput.addEventListener("change", function(){
+
+    const file = this.files[0];
+
+    if(!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = function(e){
+
+        currentImage = e.target.result;
+
+        previewImg.src = currentImage;
+
+        imagePreview.style.display = "block";
+
+    };
+
+    reader.readAsDataURL(file);
+
+});
+
+
+/* =====================================
+   ADD / UPDATE PROJECT
+===================================== */
+
+form.addEventListener("submit", function(e){
+
+    e.preventDefault();
+
+    const name =
+        nameInput.value.trim();
+
+    const description =
+        descriptionInput.value.trim();
+
+    const link =
+        linkInput.value.trim();
+
+
+    if(!name || !description){
+
+        showToast("Please enter project name and description.");
+
+        return;
+
+    }
+
+
+    /* UPDATE */
+
+    if(editingId !== null){
+
+        const projectIndex =
+            projects.findIndex(
+                project => project.id === editingId
+            );
+
+        if(projectIndex !== -1){
+
+            projects[projectIndex].name = name;
+
+            projects[projectIndex].description =
+                description;
+
+            projects[projectIndex].link =
+                link;
+
+            if(currentImage){
+
+                projects[projectIndex].image =
+                    currentImage;
+
+            }
+
+            showToast("Project updated successfully.");
+
+        }
+
+    }
+
+    /* ADD */
+
+    else{
+
+        const newProject = {
+
+            id: Date.now(),
+
+            name: name,
+
+            description: description,
+
+            image: currentImage || "",
+
+            link: link,
+
+            published: true,
+
+            createdAt:
+                new Date().toISOString()
+
+        };
+
+
+        projects.push(newProject);
+
+        showToast("Project added successfully.");
+
+    }
+
+
+    saveProjects();
+
+    resetForm();
+
+    displayProjects();
+
+});
+
+
+/* =====================================
+   SAVE LOCAL STORAGE
+===================================== */
+
+function saveProjects(){
+
+    localStorage.setItem(
+        "portfolioProjects",
+        JSON.stringify(projects)
+    );
+
+}
+
+
+/* =====================================
+   DISPLAY PROJECTS
+===================================== */
+
+function displayProjects(){
+
+    const search =
+        searchInput.value
+        .toLowerCase()
+        .trim();
+
+
+    const filtered =
+        projects.filter(project =>
+
+            project.name
+            .toLowerCase()
+            .includes(search)
+
+            ||
+
+            project.description
+            .toLowerCase()
+            .includes(search)
+
+        );
+
+
+    projectCount.textContent =
+        projects.length;
+
+
+    publishedCount.textContent =
+        projects.filter(
+            project => project.published
+        ).length;
+
+
+    if(filtered.length === 0){
+
+        projectsContainer.innerHTML = `
+
+            <div class="empty">
+
+                <h3>📂 No Projects Found</h3>
+
+                <p>
+                    Add your first portfolio project above.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    projectsContainer.innerHTML =
+        filtered.map(project => `
+
+            <article class="project-card">
+
+                <div class="project-image">
+
+                    ${
+                        project.image
+
+                        ?
+
+                        `<img
+                            src="${project.image}"
+                            alt="${escapeHTML(project.name)}"
+                        >`
+
+                        :
+
+                        `<div style="
+                            height:100%;
+                            display:flex;
+                            align-items:center;
+                            justify-content:center;
+                            color:#555;
+                            font-size:45px;
+                        ">
+                            🚀
+                        </div>`
+                    }
+
+                </div>
+
+
+                <div class="project-content">
+
+                    <h3>
+                        ${escapeHTML(project.name)}
+                    </h3>
+
+                    <p>
+                        ${escapeHTML(project.description)}
+                    </p>
+
+
+                    <div class="project-actions">
+
+                        ${
+                            project.link
+
+                            ?
+
+                            `<button
+                                class="action-btn"
+                                onclick="openProject('${project.link}')"
+                            >
+                                👁️ View
+                            </button>`
+
+                            :
+
+                            ""
+                        }
+
+
+                        <button
+                            class="action-btn"
+                            onclick="editProject(${project.id})"
+                        >
+                            ✏️ Edit
+                        </button>
+
+
+                        <button
+                            class="action-btn delete"
+                            onclick="deleteProject(${project.id})"
+                        >
+                            🗑️ Delete
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        `).join("");
+
+}
+
+
+/* =====================================
+   EDIT PROJECT
+===================================== */
+
+function editProject(id){
+
+    const project =
+        projects.find(
+            project => project.id === id
+        );
+
+
+    if(!project) return;
+
+
+    editingId = id;
+
+
+    nameInput.value =
+        project.name;
+
+    descriptionInput.value =
+        project.description;
+
+    linkInput.value =
+        project.link || "";
+
+
+    currentImage =
+        project.image || "";
+
+
+    if(project.image){
+
+        previewImg.src =
+            project.image;
+
+        imagePreview.style.display =
+            "block";
+
+    }
+    else{
+
+        imagePreview.style.display =
+            "none";
+
+    }
+
+
+    formTitle.textContent =
+        "✏️ Edit Project";
+
+    saveButton.textContent =
+        "💾 Update Project";
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =====================================
+   DELETE PROJECT
+===================================== */
+
+function deleteProject(id){
+
+    const project =
+        projects.find(
+            project => project.id === id
+        );
+
+
+    if(!project) return;
+
+
+    const confirmDelete =
+        confirm(
+            `Delete "${project.name}"?`
+        );
+
+
+    if(!confirmDelete) return;
+
+
+    projects =
+        projects.filter(
+            project => project.id !== id
+        );
+
+
+    saveProjects();
+
+    displayProjects();
+
+    showToast("Project deleted.");
+
+}
+
+
+/* =====================================
+   OPEN PROJECT
+===================================== */
+
+function openProject(link){
+
+    if(!link) return;
+
+    let url = link;
+
+    if(
+        !url.startsWith("http://") &&
+        !url.startsWith("https://")
+    ){
+
+        url = "https://" + url;
+
+    }
+
+
+    window.open(
+        url,
+        "_blank"
+    );
+
+}
+
+
+/* =====================================
+   RESET FORM
+===================================== */
+
+function resetForm(){
+
+    form.reset();
+
+    editingId = null;
+
+    currentImage = "";
+
+    imagePreview.style.display =
+        "none";
+
+    previewImg.src = "";
+
+    formTitle.textContent =
+        "➕ Add New Project";
+
+    saveButton.textContent =
+        "💾 Save Project";
+
+}
+
+
+/* =====================================
+   LOGOUT
+===================================== */
+
+function logout(){
+
+    sessionStorage.removeItem(
+        "adminLoggedIn"
+    );
+
+    window.location.href =
+        "admin.html";
+
+}
+
+
+/* =====================================
+   TOAST MESSAGE
+===================================== */
+
+function showToast(message){
+
+    const toast =
+        document.getElementById("toast");
+
+
+    toast.textContent =
+        message;
+
+
+    toast.classList.add("show");
+
+
+    setTimeout(() => {
+
+        toast.classList.remove("show");
+
+    }, 2500);
+
+}
+
+
+/* =====================================
+   SECURITY / HTML ESCAPE
+===================================== */
+
+function escapeHTML(text){
+
+    return String(text)
+
+        .replace(/&/g, "&amp;")
+
+        .replace(/</g, "&lt;")
+
+        .replace(/>/g, "&gt;")
+
+        .replace(/"/g, "&quot;")
+
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/* =====================================
+   INITIAL LOAD
+===================================== */
+
+displayProjects();
+
+</script>
+
+</body>
+</html>

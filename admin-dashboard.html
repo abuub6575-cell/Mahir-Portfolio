@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard | Mahir Elite2</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #090909;
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        /* =========================
+           SIDEBAR
+        ========================= */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 260px;
+            height: 100vh;
+            background: #111;
+            border-right: 1px solid #292929;
+            padding: 25px 15px;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 23px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 35px;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: #ff1e1e;
+        }
+
+        .admin-badge {
+            background: #1a1a1a;
+            border: 1px solid #292929;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 25px;
+        }
+
+        .admin-badge strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .admin-badge small {
+            color: #888;
+        }
+
+        .menu-title {
+            color: #666;
+            font-size: 11px;
+            text-transform: uppercase;
+            margin: 20px 10px 10px;
+            letter-spacing: 1px;
+        }
+
+        .menu a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: #aaa;
+            padding: 13px 15px;
+            border-radius: 9px;
+            margin-bottom: 6px;
+            transition: 0.25s;
+        }
+
+        .menu a:hover,
+        .menu a.active {
+            background: #1d1d1d;
+            color: white;
+        }
+
+        .menu a.active {
+            border-left: 3px solid #ff1e1e;
+        }
+
+        .logout {
+            margin-top: 25px !important;
+            color: #ff5555 !important;
+        }
+
+        .logout:hover {
+            background: #291313 !important;
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .main {
+            margin-left: 260px;
+            min-height: 100vh;
+            padding: 30px;
+        }
+
+        /* TOPBAR */
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .topbar h1 {
+            font-size: 28px;
+            margin-bottom: 6px;
+        }
+
+        .topbar p {
+            color: #777;
+        }
+
+        .top-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .icon-btn {
+            width: 42px;
+            height: 42px;
+            border: 1px solid #292929;
+            background: #121212;
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 17px;
+        }
+
+        .admin-user {
+            padding: 10px 15px;
+            background: #151515;
+            border: 1px solid #292929;
+            border-radius: 10px;
+        }
+
+        /* =========================
+           WELCOME
+        ========================= */
+
+        .welcome {
+            background:
+                linear-gradient(
+                    135deg,
+                    #191919,
+                    #0d0d0d
+                );
+
+            border: 1px solid #292929;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 25px;
+        }
+
+        .welcome h2 {
+            font-size: 25px;
+            margin-bottom: 10px;
+        }
+
+        .welcome p {
+            color: #999;
+        }
+
+        /* =========================
+           CARDS
+        ========================= */
+
+        .cards {
+            display: grid;
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 18px;
+            margin-bottom: 25px;
+        }
+
+        .card {
+            background: #121212;
+            border: 1px solid #292929;
+            border-radius: 14px;
+            padding: 22px;
+            transition: 0.25s;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            border-color: #444;
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .card-icon {
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #1e1e1e;
+            border-radius: 10px;
+            font-size: 19px;
+        }
+
+        .card h3 {
+            color: #777;
+            font-size: 13px;
+            font-weight: normal;
+        }
+
+        .card-number {
+            font-size: 28px;
+            font-weight: 800;
+        }
+
+        .card-status {
+            color: #55e878;
+            font-size: 12px;
+        }
+
+        /* =========================
+           GRID
+        ========================= */
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+
+        .panel {
+            background: #121212;
+            border: 1px solid #292929;
+            border-radius: 15px;
+            padding: 23px;
+            margin-bottom: 20px;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .panel-header h2 {
+            font-size: 18px;
+        }
+
+        .view-all {
+            color: #ff4444;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        /* =========================
+           PROJECTS
+        ========================= */
+
+        .project {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid #242424;
+        }
+
+        .project:last-child {
+            border-bottom: none;
+        }
+
+        .project-info {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+        }
+
+        .project-image {
+            width: 48px;
+            height: 48px;
+            background: #1e1e1e;
+            border-radius: 9px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+        }
+
+        .project h3 {
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .project p {
+            color: #777;
+            font-size: 12px;
+        }
+
+        .project-actions {
+            display: flex;
+            gap: 7px;
+        }
+
+        .small-btn {
+            border: 1px solid #333;
+            background: #191919;
+            color: #bbb;
+            padding: 7px 10px;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+
+        .small-btn:hover {
+            color: white;
+        }
+
+        /* =========================
+           QUICK ACTIONS
+        ========================= */
+
+        .quick-action {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            background: #191919;
+            border: 1px solid #292929;
+            color: white;
+            padding: 14px;
+            border-radius: 9px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .quick-action:hover {
+            background: #222;
+        }
+
+        /* =========================
+           STATUS
+        ========================= */
+
+        .online {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            color: #61e981;
+            font-size: 13px;
+        }
+
+        .dot {
+            width: 9px;
+            height: 9px;
+            background: #61e981;
+            border-radius: 50%;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 1000px) {
+
+            .cards {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 700px) {
+
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+                border-right: none;
+                border-bottom: 1px solid #292929;
+            }
+
+            .main {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .topbar {
+                display: block;
+            }
+
+            .top-actions {
+                margin-top: 15px;
+            }
+
+            .project-actions {
+                display: none;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         SIDEBAR
+    ========================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            Mahir <span>Elite2</span>
+        </div>
+
+
+        <div class="admin-badge">
+
+            <strong>👤 Admin</strong>
+
+            <small>
+                Administrator
+            </small>
+
+        </div>
+
+
+        <div class="menu-title">
+            Main Menu
+        </div>
+
+
+        <nav class="menu">
+
+            <a href="#" class="active">
+                🏠
+                <span>Dashboard</span>
+            </a>
+
+            <a href="#">
+                👤
+                <span>Profile</span>
+            </a>
+
+            <a href="#">
+                📁
+                <span>Projects</span>
+            </a>
+
+            <a href="#">
+                📝
+                <span>About Me</span>
+            </a>
+
+            <a href="#">
+                💼
+                <span>Skills</span>
+            </a>
+
+            <a href="#">
+                📧
+                <span>Messages</span>
+            </a>
+
+
+            <div class="menu-title">
+                System
+            </div>
+
+
+            <a href="#">
+                ⚙️
+                <span>Settings</span>
+            </a>
+
+            <a
+                href="#"
+                class="logout"
+                onclick="logout()"
+            >
+                🚪
+                <span>Logout</span>
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+
+    <!-- =========================
+         MAIN
+    ========================= -->
+
+    <main class="main">
+
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>
+                    Dashboard
+                </h1>
+
+                <p>
+                    Manage your portfolio website
+                </p>
+
+            </div>
+
+
+            <div class="top-actions">
+
+                <button
+                    class="icon-btn"
+                    title="Notifications"
+                >
+                    🔔
+                </button>
+
+                <div class="admin-user">
+                    👤 Admin
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- WELCOME -->
+
+        <section class="welcome">
+
+            <h2>
+                Welcome back, Admin 👋
+            </h2>
+
+            <p>
+                Manage your Mahir Elite2 portfolio
+                from this control panel.
+            </p>
+
+        </section>
+
+
+
+        <!-- STATISTICS -->
+
+        <section class="cards">
+
+
+            <div class="card">
+
+                <div class="card-top">
+
+                    <h3>
+                        PROJECTS
+                    </h3>
+
+                    <div class="card-icon">
+                        📁
+                    </div>
+
+                </div>
+
+                <div class="card-number">
+                    6
+                </div>
+
+                <span class="card-status">
+                    Active projects
+                </span>
+
+            </div>
+
+
+
+            <div class="card">
+
+                <div class="card-top">
+
+                    <h3>
+                        SKILLS
+                    </h3>
+
+                    <div class="card-icon">
+                        💡
+                    </div>
+
+                </div>
+
+                <div class="card-number">
+                    8
+                </div>
+
+                <span class="card-status">
+                    Listed skills
+                </span>
+
+            </div>
+
+
+
+            <div class="card">
+
+                <div class="card-top">
+
+                    <h3>
+                        MESSAGES
+                    </h3>
+
+                    <div class="card-icon">
+                        📧
+                    </div>
+
+                </div>
+
+                <div class="card-number">
+                    0
+                </div>
+
+                <span class="card-status">
+                    No new messages
+                </span>
+
+            </div>
+
+
+
+            <div class="card">
+
+                <div class="card-top">
+
+                    <h3>
+                        WEBSITE
+                    </h3>
+
+                    <div class="card-icon">
+                        🌐
+                    </div>
+
+                </div>
+
+                <div class="card-number">
+                    ON
+                </div>
+
+                <span class="card-status">
+                    ● Online
+                </span>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- CONTENT GRID -->
+
+        <div class="dashboard-grid">
+
+
+            <!-- PROJECTS -->
+
+            <section class="panel">
+
+                <div class="panel-header">
+
+                    <h2>
+                        Recent Projects
+                    </h2>
+
+                    <a href="#" class="view-all">
+                        View all
+                    </a>
+
+                </div>
+
+
+
+                <div class="project">
+
+                    <div class="project-info">
+
+                        <div class="project-image">
+                            🎨
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Graphic Design
+                            </h3>
+
+                            <p>
+                                Design Project
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="project-actions">
+
+                        <button class="small-btn">
+                            ✏️
+                        </button>
+
+                        <button class="small-btn">
+                            👁️
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="project">
+
+                    <div class="project-info">
+
+                        <div class="project-image">
+                            💻
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Portfolio Website
+                            </h3>
+
+                            <p>
+                                Web Development
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="project-actions">
+
+                        <button class="small-btn">
+                            ✏️
+                        </button>
+
+                        <button class="small-btn">
+                            👁️
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="project">
+
+                    <div class="project-info">
+
+                        <div class="project-image">
+                            🎬
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Video Editing
+                            </h3>
+
+                            <p>
+                                Motion Graphics
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="project-actions">
+
+                        <button class="small-btn">
+                            ✏️
+                        </button>
+
+                        <button class="small-btn">
+                            👁️
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="project">
+
+                    <div class="project-info">
+
+                        <div class="project-image">
+                            📊
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Data Analytics
+                            </h3>
+
+                            <p>
+                                Data Project
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="project-actions">
+
+                        <button class="small-btn">
+                            ✏️
+                        </button>
+
+                        <button class="small-btn">
+                            👁️
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- RIGHT SIDE -->
+
+            <div>
+
+
+                <!-- QUICK ACTIONS -->
+
+                <section class="panel">
+
+                    <div class="panel-header">
+
+                        <h2>
+                            Quick Actions
+                        </h2>
+
+                    </div>
+
+
+                    <button
+                        class="quick-action"
+                        onclick="addProject()"
+                    >
+                        ➕
+                        Add New Project
+                    </button>
+
+
+                    <button
+                        class="quick-action"
+                        onclick="editProfile()"
+                    >
+                        👤
+                        Edit Profile
+                    </button>
+
+
+                    <button
+                        class="quick-action"
+                        onclick="openWebsite()"
+                    >
+                        🌐
+                        View Website
+                    </button>
+
+                </section>
+
+
+
+                <!-- WEBSITE STATUS -->
+
+                <section class="panel">
+
+                    <div class="panel-header">
+
+                        <h2>
+                            Website Status
+                        </h2>
+
+                    </div>
+
+
+                    <div class="online">
+
+                        <span class="dot"></span>
+
+                        Website Online
+
+                    </div>
+
+                    <p
+                        style="
+                        color:#777;
+                        margin-top:12px;
+                        font-size:13px;
+                        "
+                    >
+                        Your portfolio is
+                        currently active.
+                    </p>
+
+                </section>
+
+
+            </div>
+
+        </div>
+
+
+    </main>
+
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+
+        /* =========================
+           CHECK LOGIN
+        ========================= */
+
+        const loggedIn =
+            sessionStorage.getItem(
+                "adminLoggedIn"
+            );
+
+
+        if (loggedIn !== "true") {
+
+            window.location.href =
+                "admin.html";
+
+        }
+
+
+
+        /* =========================
+           LOGOUT
+        ========================= */
+
+        function logout() {
+
+            sessionStorage.removeItem(
+                "adminLoggedIn"
+            );
+
+            window.location.href =
+                "admin.html";
+
+        }
+
+
+
+        /* =========================
+           QUICK ACTIONS
+        ========================= */
+
+        function addProject() {
+
+            alert(
+                "Project management will be connected next."
+            );
+
+        }
+
+
+        function editProfile() {
+
+            alert(
+                "Profile editor will be connected next."
+            );
+
+        }
+
+
+        function openWebsite() {
+
+            window.location.href =
+                "index.html";
+
+        }
+
+    </script>
+
+
+</body>
+</html>
